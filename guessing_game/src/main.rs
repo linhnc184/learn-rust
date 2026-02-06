@@ -5,15 +5,17 @@ use std::io;
 use std::cmp::Ordering;
 
 fn main() {
-    println!("Guest the number game! You have 5 trials to guess a number in range 1 to 100");
+    let trials = 3;
 
-    let secret_number = rand::thread_rng().gen_range(1..=100);
+    println!("Guest the number game! You have {trials} trials to guess a number in range 1 to 10");
+
+    let secret_number = rand::thread_rng().gen_range(1..=10);
 
     let mut guess_times = 0;
 
     loop {
-        if guess_times >=5 {
-            println!("You lose!");
+        if guess_times >= trials {
+            println!("You lose! the answer is {secret_number}");
             return;
         }
 
@@ -34,7 +36,7 @@ fn main() {
             Err(_) => {
                 println!("Please input a number!");
                 continue;
-            },
+            }
         };
 
         match guess.cmp(&secret_number) {
@@ -43,7 +45,7 @@ fn main() {
             Ordering::Equal => {
                 println!("Too win!");
                 break;
-            },
+            }
         }
     }
 }
